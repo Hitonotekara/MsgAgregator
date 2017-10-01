@@ -1,16 +1,12 @@
 {
-    "name": "yiisoft/yii2-app-advanced",
-    "description": "Yii 2 Advanced Project Template",
-    "keywords": ["yii2", "framework", "advanced", "project template"],
-    "homepage": "http://www.yiiframework.com/",
+    "name": "gevara.su/MsgAgregator",
+    "description": "Incorporate message agragator based on Yii 2 Advanced Project Template",
+    "keywords": ["sms", "message", "agregator"],
+    "homepage": "http://www.gevara.su/",
     "type": "project",
-    "license": "BSD-3-Clause",
+    "license": "GNU GPL v2",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "email": "maks.neverov@gmail.com"
     },
     "minimum-stability": "stable",
     "require": {
@@ -35,5 +31,8 @@
                 "bower-asset-library": "vendor/bower"
             }
         }
+    },
+    "scripts": {
+        "post-install-cmd": "php init"
     }
 }
