@@ -2,10 +2,12 @@
 
 /* @var $this yii\web\View */
 
-use yii\helpers\Html;
-use yii\helpers\Inflector;
+// use yii\helpers\Html;
+// use yii\helpers\Inflector;
 
-$this->title = 'Main manager';
+use yii\grid\GridView;
+
+$this->title = 'Abonents';
 ?>
 
 <style type="text/css">
@@ -28,82 +30,48 @@ $this->title = 'Main manager';
     <div class="jumbotron">
         <h1></h1>
 
-        <p class="lead"> <?= $entquery->title ?></p>
+        <p class="lead"> <?= $entinfo->title ?></p>
 
-        <table border="1">
+        <p>
+            <?php
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
 
-            <hr>
-                <td>
-                    ID
-                </td>
-                <td>
-                    Имя
-                </td>
-                <td>
-                    Описание
-                </td>
-                <td>
-                    Контакт
-                </td>
-                <td>
-                    Действие
-                </td>
-                <td>
-                    Удаление
-                </td>
-            </hr>
+                    [
+                        'attribute' => 'id',
+                        'visible' => 1,
+                    ],
+                    [
+                        'attribute' => 'name',
+                        'visible' => 1,
+                    ],
+                    [
+                        'attribute' => 'description',
+                        'visible' => 1,
+                    ],
+                    [
+                        'attribute' => 'contact',
+                        'visible' => 1,
+                    ],
+                    [
+                        'attribute' => 'status',
+                        'visible' => 0,
+                    ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} -- {update} -- {delete}',
+                    ],
 
-            <?php foreach ($entitys as $ent): ?>
 
-                <tr>
-                    <td>
-                        <?= $ent->id ?>
-                    </td>
-                    <td>
-                    <a href="index.php?r=manager%2Fedit-abonent&id=<?= $ent->id ?>">
-                        <?= $ent->name ?>
-                    </a>
-                    </td>
-                    <td>
-                        <?= $ent->description ?>
-                    </td>
-                    <td>
-                        <?= $ent->contact ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-default" style="font-size: 10px; background: #99ff5f" href="index.php?r=manager%2Findex">Редактировать</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-default" style="font-size: 10px; background: #ffa0a8 " href="index.php?r=manager%2Findex">Удалить</a>
-                    </td>
-                </tr>
+                ],
+    ]);
 
-            <?php endforeach; ?>
 
-            <tr>
-                <form>
-            <td>
-                <input name="id" value="" size="4">
-            </td>
-            <td>
-                <input name="name" value="" size="25">
-            </td>
-            <td>
-                <input name="description" value="" size="35">
-            </td>
-            <td>
-                <input name="contact" value="" size="15">
-            </td>
-            <td>
-                <a class="btn btn-default" style="font-size: 10px; background: #ffe347" href="index.php?r=manager%2Findex">Добавить</a>
-            </td>
-            <td>
+            ?>
+        </p>
 
-            </td>
-                </form>
-            </tr>
 
-        </table>
 
     </div>
 
@@ -113,7 +81,7 @@ $this->title = 'Main manager';
             <div class="col-lg-4">
                 <h2></h2>
 
-                <p></p>
+
 
                 <p>
                     <a class="btn btn-default" style="background: #189eff;" href="index.php?r=manager%2Findex">Обратно</a>

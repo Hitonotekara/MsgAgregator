@@ -13,6 +13,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+use yii\data\ActiveDataProvider;
+
 use backend\models\Manager;
 use backend\models\Abonent;
 
@@ -84,14 +86,25 @@ class ManagerController extends Controller
 
     public function actionViewAbonents()
     {
-        $entitys = Abonent::find()->where(['status' => Abonent::STATUS_ACTIVE])->all();
+        #$entitys = Abonent::find()->where(['status' => Abonent::STATUS_ACTIVE])->all();
 
-        $ent = Yii::$app->request->get('ent');
-        $entquery = Manager::findOne(['entity' => $ent]);
+        $entRequest = Yii::$app->request->get('ent');
+        $entinfo = Manager::findOne(['entity' => $entRequest]);
 
-        return $this->render('view-abonents', [
-            'entitys' => $entitys,
-            'entquery' => $entquery,
+        $viewSet = 'view-abonents';
+        #$viewSet = 'view-abonents2';
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Abonent::find()->where(['status' => Abonent::STATUS_ACTIVE]),
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
+
+        return $this->render($viewSet, [
+            #'entitys' => $entitys,
+            'entinfo' => $entinfo,
+            'dataProvider' => $dataProvider,
         ]);
     }
 }
