@@ -6,6 +6,7 @@
 // use yii\helpers\Inflector;
 
 use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 $this->title = 'Abonents';
 ?>
@@ -13,13 +14,7 @@ $this->title = 'Abonents';
 <style type="text/css">
 
     table tr td {
-        padding: 5px 10px 5px 10px;
         text-align: left;
-    }
-
-    table hr td {
-        font-size: 12px;
-        font-weight: bold;
     }
 
 
@@ -60,9 +55,15 @@ $this->title = 'Abonents';
                     ],
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} -- {update} -- {delete}',
-                    ],
+                        'template' => '{view} &nbsp;&nbsp; {update} &nbsp;&nbsp; {delete}',
+                        'urlCreator' => function ( $action, $model, $key, $index) {
+                            $url = new ActionColumn;
+                            $action = $action . '-abonent';
 
+                            //return string;
+                            return $url->createUrl($action, $model, $key, $index);
+                        },
+                    ],
 
                 ],
     ]);
