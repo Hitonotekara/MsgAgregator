@@ -54,12 +54,15 @@ $renderCall = function ($string) {
             <tr>
                 <td>
                     <?= $form->field($model, 'name') // ->render($renderCall($entity->contact)) // ($entity->name) { return }) ?>
+                    <?= $entity->name ?>
                 </td>
                 <td>
                     <?= $form->field($model, 'description') ?>
+                    <?= $entity->description ?>
                 </td>
                 <td>
                     <?= $form->field($model, 'contact') ?>
+                    <?= $entity->contact ?>
                 </td>
                 <td>
                     <?= Html::submitButton('Обновить', ['class' => 'btn btn-primary']) ?>
@@ -71,7 +74,7 @@ $renderCall = function ($string) {
 
         <?php ActiveForm::end(); ?>
 
-        <?= $entity->name ?>
+
 
         <!-- // Form: Add Abonent  -->
         </div>
