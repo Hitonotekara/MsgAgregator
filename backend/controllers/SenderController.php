@@ -61,7 +61,7 @@ class SenderController extends Controller
         ];
     }
 
-    public static function sendProstor()
+    public static function sendProstor($arrayAbonents, $text)
     {
 
 
@@ -82,24 +82,43 @@ class SenderController extends Controller
     # var_dump($gate->senders()); // получаем список доступных подписей
         $responseLog['senders'] = $gate->senders();
 
-$messages = array(
+
+        $messages = [];
+
+        foreach ($arrayAbonents as $abn)
+        {
+            $messages[] = [
+                "clientId" => "1",
+                "phone"=> $abn,
+                "text"=> $text,
+            ];
+        }
+
+        # var_dump($gate->send($messages, 'testQueue')); //отправляем пакет sms
+        $responseLog['send'] = $gate->send($messages, 'testQueue');
+
+
+/*
+
+ $messages = array(
     array(
         "clientId" => "1",
         "phone"=> "79639953804",
-        "text"=> "Order #00198 complete",
+        "text"=> $text,
         "sender"=> ""
     ),
     array(
         "clientId" => "1",
         "phone"=> "79057208983",
-        "text"=> "Order #00198 complete",
+        "text"=> $text,
         "sender"=> ""
     ),
 
 );
 
-    # var_dump($gate->send($messages, 'testQueue')); //отправляем пакет sms
-        $responseLog['send'] = $gate->send($messages, 'testQueue');
+ */
+
+
 
 
 /* example
@@ -147,7 +166,7 @@ $messages = array(
 
        ## $errMes = self::sendProstor() !== null ? self::sendProstor() : 'пусто';
 
-       $errMes = self::sendProstor();
+       # $errMes = self::sendProstor();
 
         //$serviceSend = new ServiceSend();
         //$errMes = $serviceSend->Test();
@@ -168,10 +187,15 @@ $messages = array(
                 $arrayAbonents[] = $abn->contact;
             }
 
+
+            $errMes = self::sendProstor($arrayAbonents, $model->text);
+            $errMes[] = $arrayAbonents;
+
             //$errMes = $expAbnId;
             //$errMes = $abonents[0]->contact;
 
-            #$errMes = $arrayAbonents;
+            //$errMes = $arrayAbonents;
+            //$errMes = $model->text;
 
         } else {
             //
